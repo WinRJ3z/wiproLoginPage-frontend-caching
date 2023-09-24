@@ -1,4 +1,4 @@
-# wiproLoginPage-frontendcaching-and-sso
+# wiproLoginPage-frontendcaching
 # Django-React Front-End Caching with IndexedDB
 Transformium 
 
