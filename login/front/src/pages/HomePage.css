@@ -1,0 +1,16 @@
+/* HomePage.css */
+.logout-button {
+  background-color: blue;     /* Change the background color to blue */
+  color: white;               /* Change the font color to white */
+  font-size: 16px;            /* Adjust font size for better readability */
+  padding: 10px 20px;         /* Add padding for better button spacing */
+  border: none;               /* Remove border for a cleaner look */
+  cursor: pointer;            /* Show hand cursor on hover */
+  border-radius: 5px;         /* Add rounded corners for a button-like appearance */
+  outline: none;              /* Remove the outline when button is focused */
+  transition: background-color 0.3s ease;  /* Add smooth transition for background color */
+}
+
+.logout-button:hover {
+  background-color: darkblue; /* Change the background color on hover */
+}

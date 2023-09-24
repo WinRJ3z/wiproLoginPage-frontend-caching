@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .login-box {
+            background-color: #fff;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0366d6;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #005cc5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="https://www.creativefabrica.com/wp-content/uploads/2019/06/Transformium-by-valian-580x410.jpg" alt="Transformers" width="300">
+    </div>
+
+    <div class="login-box">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <h3>Log In to your account!</h3>
+        <form method="post" action="/signin" class="mb-2">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" required>
+            </div>
+            <div class="form-group">
+                <label for="pass1">Password</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Your Password" required>
+            </div>
+             <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

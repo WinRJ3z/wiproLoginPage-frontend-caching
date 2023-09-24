@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Transformium Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+
+        }
+
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .login-box {
+            background-color: #ffd;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0366d6;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #005cc5;
+        }
+
+        .form-group a {
+            color: #0366d6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/981880f7-88a2-4f8d-a147-96b3c20cef13/d426a4r-deb9515a-c57e-49ff-9998-feffaf67195f.png/v1/fill/w_900,h_869/autobot_logo_by_k_liss_d426a4r-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODY5IiwicGF0aCI6IlwvZlwvOTgxODgwZjctODhhMi00ZjhkLWExNDctOTZiM2MyMGNlZjEzXC9kNDI2YTRyLWRlYjk1MTVhLWM1N2UtNDlmZi05OTk4LWZlZmZhZjY3MTk1Zi5wbmciLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GEOXXgSAqMD8Jg3kdzDR-IVYnqkutSzU1OXH5uf329A" alt="Transformium logo" width="200">
+    </div>
+
+    <div class="login-box">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <h3>Welcome to TRANSFORMIUM!</h3>
+
+            {% if user.is_authenticated %}
+        <h3>Hello!</h3>
+        <h4>You're successfully logged in.</h4>
+
+     {% else %}w
+      <div class="container">
+    <h3>Login to your account!</h3>
+    <a href="{% url 'azure_oauth' %}" class="btn btn-primary">Login with Microsoft Account</a>
+
+</div>
+     <button type="submit" class="btn btn-primary"><a href="/signup" class="text-white">Sign Up</a></button>
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary"><a href="/signin" class="text-white">Sign in</a></button>
+
+    {% endif %}
+
+
+</body>
+</html>

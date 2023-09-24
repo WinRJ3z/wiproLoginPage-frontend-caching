@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <style>
+        body {
+            background-image: url('https://www.wetafx.co.nz/assets/Uploads/images/article/desktop/E77_gallery_overlay_desktop3_1920x1080px.jpg'); /* Replace with the path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.9); /* Adjust the transparency level */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h3>Welcome to your Dashboard!</h3>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="mb-0">Hello!</h3>
+                <h4 class="mb-0">You're successfully logged in.</h4>
+            </div>
+            <div class="card-body">
+                <div id="win">
+                    <!-- Display user information here using JavaScript -->
+                </div>
+            </div>
+            <div class="card-footer">
+    <button type="button" class="btn btn-primary" id="signout-btn" onclick="clearStorageAndSignOut()">Sign Out</button>
+</div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <script src="https://alcdn.msauth.net/browser/2.15.0/js/msal-browser.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        const userData = JSON.parse('{{ dict2|escapejs }}');
+        const userDiv = document.getElementById('win');
+
+        if (userData.user_name === null && userData.address === null) {
+            userDiv.innerHTML += `
+                <p>User Name: null</p>
+                <p>address: null</p>
+            `;
+        } else {
+            userDiv.innerHTML += `
+                <p>User Name: ${userData.user_name}</p>
+                <p>address: ${userData.address}</p>
+            `;
+         // Storing in session storage
+        sessionStorage.setItem('username', userData.user_name);
+
+        sessionStorage.setItem('timestamp', new Date().getTime());
+        sessionStorage.setItem('address', userData.address);
+
+        // Storing in indexedDB
+        const request = indexedDB.open('userDB', 1);
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            const objectStore = db.createObjectStore('users', { keyPath: 'timestamp' });
+            objectStore.createIndex('username', 'username', { unique: false });
+            objectStore.createIndex('address', 'address', { unique: false });
+        };
+
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            const transaction = db.transaction('users', 'readwrite');
+            const objectStore = transaction.objectStore('users');
+            const timestamp = new Date().getTime();
+            objectStore.add({ username: userData.user_name, address: userData.address, timestamp: timestamp });
+        };
+    }
+
+
+        function getLastStoredCredentials() {
+            // Retrieve from session storage
+            const username = sessionStorage.getItem('username');
+            const address = sessionStorage.getItem('address');
+
+            if (username && address) {
+                console.log('Last stored credentials from session storage:');
+                console.log('Username:', username);
+                console.log('address:', address);
+            }
+
+            // Retrieve from indexedDB
+            const request = indexedDB.open('userDB', 1);
+
+            request.onsuccess = (event) => {
+                const db = event.target.result;
+                const transaction = db.transaction('users', 'readonly');
+                const objectStore = transaction.objectStore('users');
+                const index = objectStore.index('timestamp');
+
+                index.openCursor(null, 'prev').onsuccess = (event) => {
+                    const cursor = event.target.result;
+
+                    if (cursor) {
+                        console.log('Last stored credentials from indexedDB:');
+                        console.log('Username:', cursor.value.username);
+                        console.log('address:', cursor.value.address);
+                        console.log('Timestamp:', new Date(cursor.value.timestamp).toLocaleString());
+                        // Stop after the first entry (the most recent one)
+                        cursor.continue();
+
+
+                    }
+                };
+            };
+        }
+            getLastStoredCredentials();
+
+
+
+    </script>
+       <script type="text/javascript">
+    const msalConfig = {
+        auth: {
+            clientId: '72592475-e079-450b-b020-f6d99d02cf33',
+            authority: 'https://login.microsoftonline.com/consumers',
+            redirectUri: 'https://localhost:8000/', // Replace with your app's redirect URL
+        }
+    };
+
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+</script>
+
+
+
+<script type="text/javascript">
+
+
+    function clearStorageAndSignOut() {
+        // Sign out from Azure AD
+        const logoutRequest = {
+            account: msalInstance.getAllAccounts()[0], // Replace with the appropriate account index if you have multiple accounts
+            postLogoutRedirectUri: '/', // Redirect to the home page after signout
+        };
+
+        msalInstance.logoutRedirect(logoutRequest).then(() => {
+            // Clear session storage
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('timestamp');
+            sessionStorage.removeItem('address');
+
+            // Clear indexedDB
+            const request = indexedDB.open('userDB', 1);
+
+            request.onsuccess = (event) => {
+                const db = event.target.result;
+                const transaction = db.transaction('users', 'readwrite');
+                const objectStore = transaction.objectStore('users');
+
+                // Clear all data from the object store
+                objectStore.clear();
+            };
+
+            // Redirect to the signout URL after clearing data
+            window.location.href = "/signout";
+
+        }).catch((error) => {
+            console.error('Azure AD logout error:', error);
+        });
+    }
+
+
+</script>
+</body>
+</html>

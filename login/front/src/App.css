@@ -1,0 +1,109 @@
+
+.App {
+  background-color: silver;
+}
+
+.Auth-form-container {
+  background-image: url('https://hdwallpaperim.com/wp-content/uploads/2017/08/22/81666-Psycho-Pass.jpg'); /* Replace 'your-image-url.jpg' with the URL or path to your background image */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(3 6 5 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: gray;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 30px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 800;
+  color: rgb(2, 30, 20);
+}
+.Auth-form-logo {
+  width: 300px; /* Set the desired width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 20px;
+}
+
+
+
+/* Style the form container */
+.signup-form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 100%;
+}
+
+/* Style form groups (label + input) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Style form labels */
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style error messages */
+p.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Style links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Center the links */
+p a {
+  display: inline-block;
+  margin-left: 5px;
+}
