@@ -1,5 +1,7 @@
 # wiproLoginPage-frontendcaching-and-sso
 # Django-React Front-End Caching with IndexedDB
+Transformium 
+
 
 This is a Django-React application that demonstrates front-end caching using IndexedDB. It allows users to sign up, log in, and access protected resources via RESTful API endpoints. The front-end caching is implemented using IndexedDB, which stores data on the client-side for faster retrieval.
 
@@ -38,10 +40,47 @@ This is a Django-React application that demonstrates front-end caching using Ind
    ```shell
    git clone https://github.com//wiproLoginPage-frontendcaching-and-sso.git
 Set up the django Backend 
+Add the correct address of the databases Bus.db and END.db in the settings.py of databases 
 
         cd backend
         python manage.py migrate
         python manage.py createsuperuser  # Create an admin user
         python manage.py runserver
+Set up the React front end:
 
-   
+         cd frontend
+         npm install
+         npm start
+Open your web browser and go to http://localhost:3000 to access the application.
+
+### Usage
+-Register a new user account by clicking "Sign Up."
+-Log in with your newly registered account.
+-Access protected resources and observe the front-end caching in action.
+-Explore the API endpoints by referring to the API documentation.
+___________________________________________________________________________________________________________________________________________________________________________________________--
+### Additional
+Before you can use SSO with Microsoft Azure, make sure you have the following:
+
+- A Microsoft Azure account.
+- An Azure Active Directory (Azure AD) tenant set up.
+- Azure AD Application Registration with appropriate permissions.
+
+### Configuration
+
+1. Create an Azure AD Application Registration:
+   - Log in to your Azure portal.
+   - Navigate to Azure Active Directory > App registrations.
+   - Create a new application registration for your project.
+   - Note down the Application ID (Client ID) and Directory (Tenant) ID.
+
+2. Configure Redirect URIs:
+   - Add the appropriate redirect URIs in your Azure AD application settings to allow authentication from your local development environment (e.g., `http://localhost:8000/auth/azuread/callback`).
+
+3. Configure Environment Variables:
+   - In your project, configure environment variables to store Azure AD-related information (Client ID, Client Secret, Tenant ID, etc.). These variables should be securely stored and accessed in your project settings.
+
+4. Update Authentication Views:
+   - Customize your Django views in authentiction/`views.py` to integrate Azure AD authentication.
+   - run only the localhost:8000 server with the html templates to access the login page with SSO
+
