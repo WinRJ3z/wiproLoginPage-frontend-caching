@@ -59,7 +59,7 @@ Open your web browser and go to http://localhost:3000 to access the application.
 -Access protected resources and observe the front-end caching in action.
 -Explore the API endpoints by referring to the API documentation.
 ___________________________________________________________________________________________________________________________________________________________________________________________--
-### Additional
+### Additional(read only if you want to use sso)
 Before you can use SSO with Microsoft Azure, make sure you have the following:
 
 - A Microsoft Azure account.
