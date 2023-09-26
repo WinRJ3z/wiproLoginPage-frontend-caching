@@ -2,6 +2,16 @@
 # Django-React Front-End Caching with IndexedDB
 Transformium 
 
+![image](https://github.com/WinRJ3z/wiproLoginPage-frontendcaching/assets/97877584/ce6f658a-7cfa-40fa-84f1-c793786ff84e)
+Sign In page
+![image](https://github.com/WinRJ3z/wiproLoginPage-frontendcaching/assets/97877584/b87bf4a7-1313-4713-b557-50ac5a6badb1)
+Sign Up page
+![image](https://github.com/WinRJ3z/wiproLoginPage-frontendcaching/assets/97877584/fc4f1610-2031-448b-83a2-b1263e80a5bf)
+HomePage
+![image](https://github.com/WinRJ3z/wiproLoginPage-frontendcaching/assets/97877584/2202f950-9c01-4ee3-aae6-aaeb3de722dc)
+Indexeddb
+
+
 
 This is a Django-React application that demonstrates front-end caching using IndexedDB. It allows users to sign up, log in, and access protected resources via RESTful API endpoints. The front-end caching is implemented using IndexedDB, which stores data on the client-side for faster retrieval.
 
@@ -11,6 +21,8 @@ This is a Django-React application that demonstrates front-end caching using Ind
 - Django Rest Framework (DRF): A powerful and flexible toolkit for building Web APIs in Django.
 - SimpleJWT: A package for adding JSON Web Token (JWT) authentication to Django applications.
 - Corsheaders: A Django application for handling Cross-Origin Resource Sharing (CORS).
+- Reactjs
+- IndexwdDB
 
 ## Features
 
